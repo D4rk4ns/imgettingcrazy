@@ -14,22 +14,22 @@ export class PetsResolver {
   }
 
   @Query(() => [Pet], { name: 'pets' })
-  findAll() {
+  findAll(): Promise<Pet[]> {
     return this.petsService.findAll();
   }
 
   @Query(() => Pet, { name: 'pet' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => Int }) id: number): Promise<Pet> {
     return this.petsService.findOne(id);
   }
 
   @Mutation(() => Pet)
-  updatePet(@Args('updatePetInput') updatePetInput: UpdatePetInput) {
+  updatePet(@Args('updatePetInput') updatePetInput: UpdatePetInput): Promise<Pet> {
     return this.petsService.update(updatePetInput.id, updatePetInput);
   }
 
   @Mutation(() => Pet)
-  removePet(@Args('id', { type: () => Int }) id: number) {
+  removePet(@Args('id', { type: () => Int }) id: number): Promise<boolean> {
     return this.petsService.remove(id);
   }
 }

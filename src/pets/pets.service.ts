@@ -1,26 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePetInput } from './dto/create-pet.input';
 import { UpdatePetInput } from './dto/update-pet.input';
+import { Pet } from './entities/pet.entity';
 
 @Injectable()
 export class PetsService {
-  create(createPetInput: CreatePetInput) {
-    return 'This action adds a new pet';
+  
+  async create(createPetInput: CreatePetInput): Promise<Pet> {
+
   }
 
-  findAll() {
-    return `This action returns all pets`;
+  async findAll(): Promise<Pet[]> {
+    
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} pet`;
+  async findOne(id: number): Promise<Pet> {
+
   }
 
-  update(id: number, updatePetInput: UpdatePetInput) {
-    return `This action updates a #${id} pet`;
+  async update(id: number, updatePetInput: UpdatePetInput): Promise<Pet> {
+
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pet`;
+  async remove(id: number): Promise<boolean> {
+
   }
 }
