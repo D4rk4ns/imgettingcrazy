@@ -6,14 +6,31 @@ import { AppController } from './app.controller';
 
 import { AppService } from './app.service';
 import { PetsModule } from './pets/pets.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
+import { OwnersModule } from './owners/owners.module';
 
 @Module({
-  imports: [GraphQLModule.forRoot<ApolloDriverConfig>({
-    driver: ApolloDriver,
-    autoSchemaFile: true
+  imports: [
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: true
   }),
-    PetsModule],
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'postgres',
+      database: 'nestjspostgres',
+      entities: ['dist/**/**/*.entity{.ts,.js}'],
+      synchronize: true,
+    }),
+    PetsModule,
+    OwnersModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private dataSource: DataSource){}
+}

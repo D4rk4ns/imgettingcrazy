@@ -9,7 +9,7 @@ export class PetsResolver {
   constructor(private readonly petsService: PetsService) {}
 
   @Mutation(() => Pet)
-  createPet(@Args('createPetInput') createPetInput: CreatePetInput) {
+  createPet(@Args('createPetInput') createPetInput: CreatePetInput): Promise<Pet> {
     return this.petsService.create(createPetInput);
   }
 
@@ -22,7 +22,7 @@ export class PetsResolver {
   findOne(@Args('id', { type: () => Int }) id: number): Promise<Pet> {
     return this.petsService.findOne(id);
   }
-
+  /*
   @Mutation(() => Pet)
   updatePet(@Args('updatePetInput') updatePetInput: UpdatePetInput): Promise<Pet> {
     return this.petsService.update(updatePetInput.id, updatePetInput);
@@ -32,4 +32,5 @@ export class PetsResolver {
   removePet(@Args('id', { type: () => Int }) id: number): Promise<boolean> {
     return this.petsService.remove(id);
   }
+  */
 }
