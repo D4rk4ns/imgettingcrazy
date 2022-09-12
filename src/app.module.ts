@@ -11,6 +11,7 @@ import { DataSource } from 'typeorm';
 import { OwnersModule } from './owners/owners.module';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -32,7 +33,7 @@ import { AuthModule } from './auth/auth.module';
     OwnersModule,
     AuthModule],
   controllers: [AppController],
-  providers: [AppService, AuthService],
+  providers: [AppService, AuthService, JwtService],
 })
 export class AppModule {
   constructor(private dataSource: DataSource){}

@@ -3,6 +3,8 @@ import { OwnersService } from './owners.service';
 import { Owner } from './entities/owner.entity';
 import { CreateOwnerInput } from './dto/create-owner.input';
 import { UpdateOwnerInput } from './dto/update-owner.input';
+import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { UseGuards } from '@nestjs/common';
 
 @Resolver(() => Owner)
 export class OwnersResolver {
@@ -14,11 +16,13 @@ export class OwnersResolver {
   }
 
   @Query(() => [Owner], { name: 'owners' })
+  @UseGuards(GqlAuthGuard)
   findAll(): Promise<Owner[]> {
     return this.ownersService.findAll();
   }
 
   @Query(() => Owner, { name: 'owner' })
+  @UseGuards(GqlAuthGuard)
   findOne(@Args('id', { type: () => Int }) id: number): Promise<Owner> {
     return this.ownersService.findOne(id);
   }
@@ -31,11 +35,13 @@ export class OwnersResolver {
   //Let's see how to fix this
   /*
   @Mutation(() => Owner)
+  @UseGuards(GqlAuthGuard)
   updateOwner(@Args('updateOwnerInput') updateOwnerInput: UpdateOwnerInput): Promise<Owner> {
     return this.ownersService.update(updateOwnerInput.id, updateOwnerInput);
   }
 */
   @Mutation(() => Owner)
+  @UseGuards(GqlAuthGuard)
   removeOwner(@Args('id', { type: () => Int }) id: number): Promise<Owner> {
     return this.ownersService.remove(id);
   }

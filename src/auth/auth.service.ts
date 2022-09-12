@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Owner } from 'src/owners/entities/owner.entity';
+import { Owner } from '../owners/entities/owner.entity';
 import { OwnersService } from '../owners/owners.service';
 import { jwtSecret } from './constants';
 
@@ -38,7 +38,7 @@ export class AuthService {
         }
     }
 
-    async verify(token: string): Promise<Owner>{
+    async verify(token: string): Promise<Owner | Error>{
         const decoded = this.jwtService.verify(token, {
             secret: jwtSecret
         });
