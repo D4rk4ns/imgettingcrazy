@@ -4,14 +4,14 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import appConfig from 'src/config/app.config';
 import { Owner } from 'src/owners/entities/owner.entity';
 import { OwnersService } from '../../owners/owners.service';
+import { jwtSecret } from '../constants';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy){
     constructor(private readonly ownersService: OwnersService){
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            ignoreExpiration: false,
-            secretOrKey: appConfig().appSecret
+            secretOrKey: jwtSecret, //tengo q cambiar esto despues
         })
     }
 

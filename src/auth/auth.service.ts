@@ -2,9 +2,9 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Owner } from '../owners/entities/owner.entity';
 import { OwnersService } from '../owners/owners.service';
-import { jwtSecret } from './constants';
 import { RegisterUserInput } from './dto/register-user.input';
 import { hash, compare } from 'bcrypt';
+import appConfig from 'src/config/app.config';
 
 @Injectable()
 export class AuthService {
@@ -48,7 +48,7 @@ export class AuthService {
 
     async verify(token: string): Promise<Owner | Error>{
         const decoded = this.jwtService.verify(token, {
-            secret: jwtSecret
+            secret: appConfig().appSecret
         });
 
         const owner = await this.ownersService.findByEmail(decoded.email);
