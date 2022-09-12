@@ -1,8 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Owner } from '../owners/entities/owner.entity';
 import { OwnersService } from '../owners/owners.service';
 import { jwtSecret } from './constants';
+import { RegisterUserInput } from './dto/register-user.input';
+import { hash, compare } from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -14,17 +16,23 @@ export class AuthService {
         const owner = await this.ownersService.findByEmail(email);
 
         if(!owner){
-            return null;
+            throw new HttpException('USER_NOT_FOUND', 404);
         }
 
-        /**
-         * In here we'll compre the encrypted password, but not for now
-         */
+        const checkPassword = await compare(password, owner.password);
 
-        const passwordIsValid = password === owner.password;
+        return checkPassword ? owner : null;
 
-        return passwordIsValid ? owner : null;
+    }
 
+    async register(registerUserInput: RegisterUserInput): Promise<Owner> {
+        const {password } = registerUserInput;
+        
+        const plainToHash = await hash(password, 10);   //return the encrypted pass
+
+        registerUserInput = {...registerUserInput, password: plainToHash};
+
+        return await this.ownersService.create(registerUserInput);
     }
 
     login(owner: Owner): { access_token: string}{
