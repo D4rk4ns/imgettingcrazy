@@ -14,10 +14,6 @@ export class Owner {
   @Field()
   name: string;
 
-  @Column()
-  @Field(type => Int)
-  ownerId: number;
-
   @OneToMany(() => Pet, pet => pet.owner)
   @Field(type => [Pet], { nullable: true })
   pets?: Pet[];
