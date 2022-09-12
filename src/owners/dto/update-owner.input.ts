@@ -9,4 +9,11 @@ export class UpdateOwnerInput extends PartialType(CreateOwnerInput) {
 
   @Field()
   name: string;
+
+  @Field({ nullable: true })
+  lastname?: string;
+
+  @Field()
+  email: string;
+
 }

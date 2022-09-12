@@ -23,6 +23,10 @@ export class OwnersService {
     return this.ownersRepository.findOneOrFail({where:{id}});
   }
 
+  async findByEmail(email: string): Promise<Owner> {
+    return this.ownersRepository.findOneOrFail({where:{email}});
+  }
+
   //Let's see how to fix this
   /*
   async update(id: number, updateOwnerInput: UpdateOwnerInput): Promise<Owner> {

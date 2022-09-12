@@ -23,6 +23,11 @@ export class OwnersResolver {
     return this.ownersService.findOne(id);
   }
 
+  @Query(() => Owner, { name: 'owner' })
+  findByEmail(@Args('email') email: string): Promise<Owner> {
+    return this.ownersService.findByEmail(email);
+  }
+
   //Let's see how to fix this
   /*
   @Mutation(() => Owner)

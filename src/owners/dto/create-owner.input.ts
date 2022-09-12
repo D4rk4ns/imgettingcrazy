@@ -6,4 +6,12 @@ export class CreateOwnerInput {
   @Field()
   name: string;
 
+  @Field({ nullable: true })
+  lastname?: string;
+
+  @Field()
+  email: string;
+
+  @Field()
+  password: string;
 }
