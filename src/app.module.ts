@@ -13,6 +13,7 @@ import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtService } from '@nestjs/jwt';
 import { typeOrmConfig, typeOrmConfigAsync } from './config/typeorm.config';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -20,6 +21,11 @@ import { typeOrmConfig, typeOrmConfigAsync } from './config/typeorm.config';
       driver: ApolloDriver,
       autoSchemaFile: true
   }),
+    ConfigModule.forRoot({
+      envFilePath: ['.env'],
+      isGlobal: true,
+      cache: true,
+    }),
     TypeOrmModule.forRoot(typeOrmConfig),
     PetsModule,
     OwnersModule,
