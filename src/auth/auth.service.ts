@@ -5,6 +5,7 @@ import { OwnersService } from '../owners/owners.service';
 import { RegisterUserInput } from './dto/register-user.input';
 import { hash, compare } from 'bcrypt';
 import appConfig from 'src/config/app.config';
+import { jwtSecret } from './constants';
 
 @Injectable()
 export class AuthService {
@@ -48,7 +49,7 @@ export class AuthService {
 
     async verify(token: string): Promise<Owner | Error>{
         const decoded = this.jwtService.verify(token, {
-            secret: appConfig().appSecret
+            secret: jwtSecret
         });
 
         const owner = await this.ownersService.findByEmail(decoded.email);

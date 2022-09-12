@@ -35,15 +35,17 @@ export class PetsResolver {
     return this.petsService.getOwner(pet.ownerId);
   }
 
-  /*
+  
   @Mutation(() => Pet)
+  @UseGuards(GqlAuthGuard)
   updatePet(@Args('updatePetInput') updatePetInput: UpdatePetInput): Promise<Pet> {
     return this.petsService.update(updatePetInput.id, updatePetInput);
   }
 
   @Mutation(() => Pet)
-  removePet(@Args('id', { type: () => Int }) id: number): Promise<boolean> {
+  @UseGuards(GqlAuthGuard)
+  removeOwner(@Args('id', { type: () => Int }) id: number): Promise<Pet> {
     return this.petsService.remove(id);
   }
-  */
+
 }

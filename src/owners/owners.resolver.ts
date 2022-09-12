@@ -32,14 +32,13 @@ export class OwnersResolver {
     return this.ownersService.findByEmail(email);
   }
 
-  //Let's see how to fix this
-  /*
+  
   @Mutation(() => Owner)
   @UseGuards(GqlAuthGuard)
   updateOwner(@Args('updateOwnerInput') updateOwnerInput: UpdateOwnerInput): Promise<Owner> {
     return this.ownersService.update(updateOwnerInput.id, updateOwnerInput);
   }
-*/
+
   @Mutation(() => Owner)
   @UseGuards(GqlAuthGuard)
   removeOwner(@Args('id', { type: () => Int }) id: number): Promise<Owner> {

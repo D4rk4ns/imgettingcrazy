@@ -27,15 +27,15 @@ export class OwnersService {
     return this.ownersRepository.findOneOrFail({where:{email}});
   }
 
-  //Let's see how to fix this
-  /*
   async update(id: number, updateOwnerInput: UpdateOwnerInput): Promise<Owner> {
-    return await this.ownersRepository.update(id, ...updateOwnerInput);
+    await this.ownersRepository.update(id, updateOwnerInput);
+    return this.ownersRepository.findOne({where: {id}});    
   }
-*/
 
-  async remove(id: number) {
+
+  async remove(id: number): Promise<Owner> {
     const deletedUser = await this.ownersRepository.findOne({where: {id}});
-    return this.ownersRepository.remove(deletedUser);
+    this.ownersRepository.remove(deletedUser);
+    return deletedUser;
   }
 }

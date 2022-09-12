@@ -8,16 +8,14 @@ export class UpdateOwnerInput extends PartialType(CreateOwnerInput) {
   @Field(type => Int)
   id:number;
 
-  @Field()
-  @IsNotEmpty()
-  name: string;
+  @Field({ nullable: true })
+  name?: string;
 
   @Field({ nullable: true })
   lastname?: string;
 
-  @Field()
-  @IsNotEmpty()
+  @Field({ nullable: true })
   @IsEmail()
-  email: string;
+  email?: string;
 
 }

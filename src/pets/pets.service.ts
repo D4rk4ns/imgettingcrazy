@@ -29,12 +29,16 @@ export class PetsService {
   async getOwner(ownerId: number): Promise<Owner> {
     return this.ownersService.findOne(ownerId);
   }
-/*
+
   async update(id: number, updatePetInput: UpdatePetInput): Promise<Pet> {
-    return this.petsRepository.update(id, updatePetInput);
+    await this.petsRepository.update(id, updatePetInput);
+    return this.petsRepository.findOne({where: {id}});    
+    
   }
 
-  async remove(id: number): Promise<boolean> {
-    return this.petsRepository.remove();
-  }*/
+  async remove(id: number): Promise<Pet> {
+    const deletedPet = await this.petsRepository.findOne({where: {id}});
+    this.petsRepository.remove(deletedPet);
+    return deletedPet;
+  }
 }
