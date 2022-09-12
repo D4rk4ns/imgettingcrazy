@@ -12,6 +12,7 @@ import { OwnersModule } from './owners/owners.module';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtService } from '@nestjs/jwt';
+import { typeOrmConfig, typeOrmConfigAsync } from './config/typeorm.config';
 
 @Module({
   imports: [
@@ -19,16 +20,7 @@ import { JwtService } from '@nestjs/jwt';
       driver: ApolloDriver,
       autoSchemaFile: true
   }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'nestjspostgres',
-      entities: ['dist/**/**/*.entity{.ts,.js}'],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(typeOrmConfig),
     PetsModule,
     OwnersModule,
     AuthModule],
