@@ -9,6 +9,8 @@ import { PetsModule } from './pets/pets.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { OwnersModule } from './owners/owners.module';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -27,9 +29,10 @@ import { OwnersModule } from './owners/owners.module';
       synchronize: true,
     }),
     PetsModule,
-    OwnersModule],
+    OwnersModule,
+    AuthModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AuthService],
 })
 export class AppModule {
   constructor(private dataSource: DataSource){}
