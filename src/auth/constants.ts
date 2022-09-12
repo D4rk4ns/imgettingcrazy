@@ -1,0 +1,1 @@
+export const jwtSecret = 'This1sD3f1nitevlyASup3rL0ngS3cr3t'; //Esto se cambiara ya que no es una buena practica
