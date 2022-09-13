@@ -12,7 +12,7 @@ import { OwnersModule } from './owners/owners.module';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtService } from '@nestjs/jwt';
-import { typeOrmConfig, typeOrmConfigAsync } from './config/typeorm.config';
+import { typeOrmConfig, typeOrmConfigAsync, typeOrmHerokuConfig } from './config/typeorm.config';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -26,7 +26,7 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
       cache: true,
     }),
-    TypeOrmModule.forRootAsync(typeOrmConfigAsync),
+    TypeOrmModule.forRoot(typeOrmHerokuConfig),
     PetsModule,
     OwnersModule,
     AuthModule],
