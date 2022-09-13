@@ -19,7 +19,9 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true
+      autoSchemaFile: true,
+      playground: true,
+      introspection: true
   }),
     ConfigModule.forRoot({
       envFilePath: ['.env'],
