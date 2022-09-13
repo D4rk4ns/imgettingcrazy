@@ -21,7 +21,8 @@ import { ConfigModule } from '@nestjs/config';
       driver: ApolloDriver,
       autoSchemaFile: true,
       playground: true,
-      introspection: true
+      introspection: true,
+      cache: 'bounded'
   }),
     ConfigModule.forRoot({
       envFilePath: ['.env'],
