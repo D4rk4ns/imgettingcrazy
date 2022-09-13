@@ -44,7 +44,7 @@ export class PetsResolver {
 
   @Mutation(() => Pet)
   @UseGuards(GqlAuthGuard)
-  removeOwner(@Args('id', { type: () => Int }) id: number): Promise<Pet> {
+  removePet(@Args('id', { type: () => Int }) id: number): Promise<Pet> {
     return this.petsService.remove(id);
   }
 

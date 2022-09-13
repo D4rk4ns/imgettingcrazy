@@ -1,0 +1,37 @@
+name: Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  linTest:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v2
+      
+      - name: Install Dependencies
+        run: |
+          echo "Running Installing Dependencies ..."
+          npm install
+      
+      - name: Run Linting
+        run: |
+          echo "Running Linting tests ..."
+          npm run lint
+        env:
+          CI: true
+  
+  build:
+    name: Building the app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          branch: "main"
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "appunest"
+          heroku_email: "jonathanlsr9622@gmail.com"

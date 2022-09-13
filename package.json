@@ -2,7 +2,7 @@
   "name": "nestjsthirdtry",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Jonathan Luis Rodriguez",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -36,6 +36,7 @@
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
+    "dotenv": "^16.0.2",
     "graphql": "^16.6.0",
     "graphql-tools": "^8.3.6",
     "passport": "^0.6.0",

@@ -12,15 +12,24 @@ import { OwnersModule } from './owners/owners.module';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtService } from '@nestjs/jwt';
-import { typeOrmConfig, typeOrmConfigAsync } from './config/typeorm.config';
+import { typeOrmConfig, typeOrmConfigAsync, typeOrmHerokuConfig } from './config/typeorm.config';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true
+      autoSchemaFile: true,
+      playground: true,
+      introspection: true,
+      cache: 'bounded'
   }),
-    TypeOrmModule.forRoot(typeOrmConfig),
+    ConfigModule.forRoot({
+      envFilePath: ['.env'],
+      isGlobal: true,
+      cache: true,
+    }),
+    TypeOrmModule.forRoot(typeOrmHerokuConfig),
     PetsModule,
     OwnersModule,
     AuthModule],
