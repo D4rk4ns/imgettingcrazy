@@ -17,10 +17,11 @@ export class PetsService {
 
     await this.petsRepository.save(newPet); //Save the new Pet
 
-    const pownerId = (await this.petsRepository.findOne({where: {name: newPet.name}})).ownerId; 
+    const pownerId = await this.petsRepository.findOne({where: {name: newPet.name}}); 
 
     if(pownerId){
-      const tempOwner = await this.ownersService.findOne(pownerId);
+      console.log(pownerId.ownerId);
+      const tempOwner = await this.ownersService.findOne(pownerId.ownerId);
       tempOwner.pets.push(newPet);
     }
 
