@@ -15,14 +15,16 @@ export class PetsService {
   async create(createPetInput: CreatePetInput): Promise<Pet> {
     const newPet = this.petsRepository.create(createPetInput);
 
-    const pownerId = newPet.ownerId //This is unnecesary
+    await this.petsRepository.save(newPet); //Save the new Pet
+
+    const pownerId = (await this.petsRepository.findOne({where: {name: newPet.name}})).ownerId; 
 
     if(pownerId){
       const tempOwner = await this.ownersService.findOne(pownerId);
       tempOwner.pets.push(newPet);
     }
 
-    return this.petsRepository.save(newPet); //insert
+    return newPet; //insert
   }
 
   async findAll(): Promise<Pet[]> {
