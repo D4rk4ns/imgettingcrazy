@@ -22,13 +22,16 @@ export class PetsService {
     if(pownerId){
       
       const tempOwner = await this.ownersService.findOne(pownerId.ownerId);
-      console.log("************************************"+tempOwner.pets);
       
       if(tempOwner.pets === undefined){
         tempOwner.pets = [pownerId];
       }
+      else{
+        tempOwner.pets.push(pownerId);
+      }
+
+      this.ownersService.update(tempOwner.id, tempOwner);
       
-      tempOwner.pets.push(pownerId);
     }
 
     return newPet; //insert
