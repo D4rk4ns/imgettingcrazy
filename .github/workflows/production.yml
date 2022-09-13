@@ -23,3 +23,16 @@ jobs:
           npm run lint
         env:
           CI: true
+  
+  build:
+    depends: [linTest]
+    name: Building the app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          branch: "main"
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "appunest"
+          heroku_email: "jonathanlsr9622@gmail.com"
