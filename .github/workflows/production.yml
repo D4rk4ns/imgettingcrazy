@@ -25,7 +25,6 @@ jobs:
           CI: true
   
   build:
-    depends: [linTest]
     name: Building the app
     runs-on: ubuntu-latest
     steps:
