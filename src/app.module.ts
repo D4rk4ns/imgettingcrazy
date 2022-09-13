@@ -26,7 +26,7 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
       cache: true,
     }),
-    TypeOrmModule.forRoot(typeOrmConfig),
+    TypeOrmModule.forRootAsync(typeOrmConfigAsync),
     PetsModule,
     OwnersModule,
     AuthModule],
