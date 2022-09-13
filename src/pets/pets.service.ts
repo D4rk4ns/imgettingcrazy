@@ -20,9 +20,10 @@ export class PetsService {
     const pownerId = await this.petsRepository.findOne({where: {name: newPet.name}}); 
 
     if(pownerId){
-      console.log("************************************"+pownerId.ownerId);
+      
       const tempOwner = await this.ownersService.findOne(pownerId.ownerId);
-      tempOwner.pets.push(newPet);
+      console.log("************************************"+tempOwner);
+      tempOwner.pets.push(pownerId);
     }
 
     return newPet; //insert
