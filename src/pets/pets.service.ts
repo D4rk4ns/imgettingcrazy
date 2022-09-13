@@ -22,7 +22,7 @@ export class PetsService {
     if(pownerId){
       
       const tempOwner = await this.ownersService.findOne(pownerId.ownerId);
-      console.log("************************************"+tempOwner);
+      console.log("************************************"+tempOwner.name);
       tempOwner.pets.push(pownerId);
     }
 
